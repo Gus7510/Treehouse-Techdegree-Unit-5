@@ -35,10 +35,11 @@
                                 Projects
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#project1">Project 1</a></li>
-                                <li><a class="dropdown-item" href="#project2">Project 2</a></li>
-                                <li><a class="dropdown-item" href="#project3">Project 3</a></li>
-                                <li><a class="dropdown-item" href="#project4">Project 4</a></li>
+                                    {% for project in projects %}
+
+                                    <li><a class="dropdown-item" href="{{url_for('project', id=project.id)}}">Project {{project.id}}</a></li>
+                                    
+                                    {% endfor %}
                                 </ul>
                             </li>
                             <li class="nav-item">
@@ -59,16 +60,20 @@
 
         
         <section id="form">
-            <form action="{{url_for('project_new')}}">
+            <form action="{{url_for('project_new')}}" method="POST">
                 <label for="title">Project Title</label>
                 <input type="text" name="title" id="title" placeholder="Project Name" required>
+
                 <label for="date">Completion Date</label>
                 <input type="month" name="date" id="date" required>
+
                 <label for="description">Description</label>
                 <textarea name="desc" id="description" cols="30" rows="20" placeholder="Description" required></textarea>
+
                 <label for="skills-list" id="skills-label">Skills</label>
                 <p>Separate each skill by a comma</p>
                 <textarea name="skills" id="skills-list" cols="30" rows="10" placeholder="Skill, Skill" required></textarea>
+                
                 <label for="github">GitHub Link</label>
                 <input type="url" name="github" id="github" placeholder="Link to the repo" required>
 
@@ -89,10 +94,10 @@
                 <!--Icons from FontAwesome.com/icons-->
                 
                 
-                <a href="">
+                <a href="{{project.github_link}}">
                     <i class="fab fa-github"></i>
                 </a>
-                <a href="">
+                <a href="https://www.linkedin.com/in/gustavo-alvarado-luna-a560b41aa/">
                     <i class="fab fa-linkedin"></i>
                 </a>
                 

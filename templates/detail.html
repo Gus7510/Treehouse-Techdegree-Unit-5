@@ -39,10 +39,11 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 
 
-                                <li><a class="dropdown-item" href="#project1">Project 1</a></li>
-                                <li><a class="dropdown-item" href="#project2">Project 2</a></li>
-                                <li><a class="dropdown-item" href="#project3">Project 3</a></li>
-                                <li><a class="dropdown-item" href="#project4">Project 4</a></li>
+                                    {% for project in projects %}
+
+                                    <li><a class="dropdown-item" href="{{url_for('project', id=project.id)}}">Project {{project.id}}</a></li>
+                                    
+                                    {% endfor %}
 
 
                                 </ul>
@@ -89,7 +90,7 @@
             <div id="triangle6"></div>
         </section>
         <section id="edit-delete">
-            <a href="#">
+            <a href="{{ url_for('project_id_edit', id=project.id)}}">
                 <i class="fas fa-edit"></i>
                 Edit
             </a>
@@ -110,7 +111,7 @@
                 </a>
 
                 
-                <!--  -->
+                
             </div>
             <div class="treehouse">
                 <p>

@@ -16,26 +16,25 @@ def index():
 @app.route("/project/<id>")
 def project(id):
     project = Project.query.get(id)
-    return render_template("detail.html", project=project)
+    projects = Project.query.all()
+    return render_template("detail.html", project=project, projects=projects)
 
 
 
 # route - for adding a new project
 @app.route("/project/new", methods=['GET', 'POST'])
 def project_new():
-    if request.form:
-        #print(request.form)
-        #print(request.form['name'])
-        # create the Python object
-        new_project = Project(title= request.form['Title'],
-                            date_finished = datetime.strptime(request.form['Date finished'], '%Y-%m-%d'),
-                            description=request.form['Description'],
-                            skills_practiced=request.form['Skills practiced'],
-                            github_link= request.form['Github Link'])
+    projects = Project.query.all()
+    if request.method == "POST":
+        new_project = Project(title= request.form['title'],
+                            date_finished = datetime.strptime(request.form['date_finished'], '%B-%Y'),
+                            description=request.form['description'],
+                            skills_practiced=request.form['skills_practiced'],
+                            github_link= request.form['github_link'])
         db.session.add(new_project)
         db.session.commit()
-        return redirect(url_for('index'))                         
-    return render_template('projectform.html', project=None)
+        return redirect(url_for('index'))                   
+    return render_template('projectform.html', project=None, projects=projects)
 
 
 
@@ -43,6 +42,7 @@ def project_new():
 @app.route("/project/<id>/edit", methods=['GET', 'POST'])
 def project_id_edit(id):
     project = Project.query.get(id)
+    projects = Project.query.all()
     if request.form:
         project.title= request.form['Title']
         project.date_finished = datetime.strptime(request.form['Date finished'], '%Y-%m-%d')
@@ -50,10 +50,10 @@ def project_id_edit(id):
         project.skills_practiced=request.form['Skills practiced']
         project.github_link= request.form['Github Link']
         return redirect(url_for('index'))
-    return render_template('editproject.html',project=project)
+    return render_template('edit.html',project=project, projects=projects)
 
 
-#### MISSING TEMPLATE "editproject.html"
+
 
 # route for deleting a project
 @app.route("/project/<id>/delete")
