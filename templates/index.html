@@ -90,7 +90,7 @@
                 {% for project in projects %}
                 <li id="{{loop.index}}" class="a-project">
                     
-                  <!---->
+                  
                     <h3> <a href="{{url_for('project', id=project.id)}}">{{ project.title }}></a></h3>
 
                     <a href="{{project.github_link}}" class="github-btn">

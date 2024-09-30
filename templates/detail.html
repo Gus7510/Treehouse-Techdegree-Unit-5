@@ -65,7 +65,7 @@
 
             <h1>{{ project.title }}</h1>
             <p>Date Finished: {{ project.date_finished.strftime('%Y-%m-%d')}}</p>
-            <a href="#" class="github-btn">
+            <a href="{{project.github_link}}" class="github-btn">
                 <i class="fab fa-github"></i>
                 View on GitHub
             </a>
@@ -94,7 +94,7 @@
                 <i class="fas fa-edit"></i>
                 Edit
             </a>
-            <a href="#">
+            <a href="{{ url_for('project_id_delete', id=project.id)}}">
                 <i class="far fa-trash-alt"></i>
                 Delete
             </a>

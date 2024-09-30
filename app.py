@@ -27,7 +27,7 @@ def project_new():
     projects = Project.query.all()
     if request.method == "POST":
         new_project = Project(title= request.form['title'],
-                            date_finished = datetime.strptime(request.form['date_finished'], '%B-%Y'),
+                            date_finished = datetime.strptime(request.form['date_finished'], '%Y-%m'),
                             description=request.form['description'],
                             skills_practiced=request.form['skills_practiced'],
                             github_link= request.form['github_link'])
@@ -44,11 +44,12 @@ def project_id_edit(id):
     project = Project.query.get(id)
     projects = Project.query.all()
     if request.form:
-        project.title= request.form['Title']
-        project.date_finished = datetime.strptime(request.form['Date finished'], '%Y-%m-%d')
-        project.description=request.form['Description']
-        project.skills_practiced=request.form['Skills practiced']
-        project.github_link= request.form['Github Link']
+        project.title= request.form['title']
+        project.date_finished = datetime.strptime(request.form['date_finished'], '%Y-%m')
+        project.description=request.form['description']
+        project.skills_practiced=request.form['skills_practiced']
+        project.github_link= request.form['github_link']
+        db.session.commit()
         return redirect(url_for('index'))
     return render_template('edit.html',project=project, projects=projects)
 
@@ -63,7 +64,7 @@ def project_id_delete(id):
     db.session.commit()
     return redirect(url_for('index'))
 
-### NOT SURE IF I AM MISSING SOMETHING HERE ABOVE
+
 
 
 

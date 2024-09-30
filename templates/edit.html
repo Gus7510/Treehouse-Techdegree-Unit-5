@@ -63,23 +63,23 @@
 
 
         <section id="form">
-            <form action="{{url_for('project_new')}}">
+            <form action="{{url_for('project_id_edit', id=project.id)}}" method="POST">
                 <label for="title">Project Title</label>
                 <input type="text" name="title" id="title" placeholder="{{ project.title }}" required value="{{project.title}}">
 
                 <label for="date">Completion Date</label>
-                <input type="month" name="date" id="date" required value="{{project.date_finished}}" >
+                <input type="month" name="date_finished" id="date" required value="{{project.date_finished}}" >
 
                 <label for="description">Description</label>
-                <textarea name="desc" id="description" cols="30" rows="20" placeholder="{{ project.description }}" required value="{{project.description}}"></textarea>
+                <textarea name="description" id="description" cols="30" rows="20" placeholder="{{ project.description }}" required value="{{project.description}}"></textarea>
 
 
                 <label for="skills-list" id="skills-label">Skills</label>
-                <textarea name="skills" id="skills-list" cols="30" rows="10" placeholder="{{project.skills_practiced}}" required value="{{project.skills_practiced}}"></textarea>
+                <textarea name="skills_practiced" id="skills-list" cols="30" rows="10" placeholder="{{project.skills_practiced}}" required value="{{project.skills_practiced}}"></textarea>
 
 
                 <label for="github">GitHub Link</label>
-                <input type="url" name="github" id="github" placeholder="Link to the repo" required value="{{project.github_link}}">
+                <input type="url" name="github_link" id="github" placeholder="Link to the repo" required value="{{project.github_link}}">
                 <div>
                     <button type="reset">Cancel</button>
                     <button type="submit">Submit</button>
@@ -90,8 +90,7 @@
 
         <section class="footer">
             <div class="socials">
-                <!--Delete any you don't use-->
-                <!--Icons from FontAwesome.com/icons-->
+                
                 
                 
                 <a href="{{project.github_link}}">
