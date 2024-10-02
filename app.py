@@ -27,7 +27,7 @@ def project_new():
     projects = Project.query.all()
     if request.method == "POST":
         new_project = Project(title= request.form['title'],
-                            date_finished = datetime.strptime(request.form['date_finished'], '%Y-%m'),
+                            date_finished = datetime.strptime(request.form['date_finished'], '%Y-%m-%d'),
                             description=request.form['description'],
                             skills_practiced=request.form['skills_practiced'],
                             github_link= request.form['github_link'])
@@ -45,7 +45,7 @@ def project_id_edit(id):
     projects = Project.query.all()
     if request.form:
         project.title= request.form['title']
-        project.date_finished = datetime.strptime(request.form['date_finished'], '%Y-%m')
+        project.date_finished = datetime.strptime(request.form['date_finished'], '%Y-%m-%d')
         project.description=request.form['description']
         project.skills_practiced=request.form['skills_practiced']
         project.github_link= request.form['github_link']
